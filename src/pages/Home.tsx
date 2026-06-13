@@ -11,8 +11,8 @@ export default function Home() {
     document.title = 'Jarvis Acevedo Real Estate';
   }, []);
 
-  // Get latest 3 active listings
-  const featuredListings = listings.slice(0, 3);
+  // Featured listings (flagged via Supabase `featured = true`)
+  const featuredListings = listings.filter(l => l.featured);
 
   return (
     <div className="flex flex-col">

@@ -61,13 +61,13 @@ export default function ListingDetail() {
       <meta name="description" content={listing.descripcion.substring(0, 160)} />
       <meta property="og:title" content={`${listing.titulo} | Jarvis Acevedo Real Estate`} />
       <meta property="og:description" content={listing.descripcion.substring(0, 160)} />
-      <meta property="og:image" content={listing.fotos[0] || 'https://picsum.photos/seed/luxuryhome/1200/630'} />
+      <meta property="og:image" content={listing.images[0] || 'https://picsum.photos/seed/luxuryhome/1200/630'} />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={`${listing.titulo} | Jarvis Acevedo Real Estate`} />
       <meta name="twitter:description" content={listing.descripcion.substring(0, 160)} />
-      <meta name="twitter:image" content={listing.fotos[0] || 'https://picsum.photos/seed/luxuryhome/1200/630'} />
+      <meta name="twitter:image" content={listing.images[0] || 'https://picsum.photos/seed/luxuryhome/1200/630'} />
 
       {/* Back Link */}
       <div className="max-w-7xl mx-auto px-6 py-8">
@@ -81,7 +81,7 @@ export default function ListingDetail() {
 
       {/* Gallery */}
       <div className="max-w-[100rem] mx-auto px-4 sm:px-6 mb-16">
-        <Gallery photos={listing.fotos} title={listing.titulo} />
+        <Gallery photos={listing.images} title={listing.titulo} />
       </div>
 
       {/* Content */}

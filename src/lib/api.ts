@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { supabase } from './supabase';
 
 export interface Listing {
   id: string;
@@ -9,56 +10,79 @@ export interface Listing {
   habitaciones: string;
   banos: string;
   metros: string;
-  fotos: string[];
   whatsapp: string;
-  activo: boolean;
   tipo: 'venta' | 'alquiler' | '';
+  status: string;
+  featured: boolean;
+  images: string[];
 }
 
+function formatPrecio(value: unknown): string {
+  if (value == null || value === '') return '';
+  if (typeof value === 'number') {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+    }).format(value);
+  }
+  const str = String(value).trim();
+  const asNum = Number(str);
+  if (!Number.isNaN(asNum) && str !== '' && /^-?\d+(\.\d+)?$/.test(str)) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+    }).format(asNum);
+  }
+  return str;
+}
 
+function normalizeTipo(value: unknown): 'venta' | 'alquiler' | '' {
+  const t = String(value ?? '').trim().toLowerCase();
+  return t === 'venta' ? 'venta' : t === 'alquiler' ? 'alquiler' : '';
+}
 
 export async function fetchListings(): Promise<Listing[]> {
   try {
-    const url = 'https://docs.google.com/spreadsheets/d/1qGezW2qSMzriidC2ap8w1kKfh80WBab6SbXoCmymZCA/gviz/tq?tqx=out:json&sheet=Sheet1';
-    const response = await fetch(url);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    const text = await response.text();
-    const data = JSON.parse(text.substring(47).slice(0, -2));
-    const rows = data.table.rows;
-    
-    const listings: Listing[] = rows.map((row: any) => {
-      const c = row.c;
-      const activoVal = c[10]?.v;
-      const isActivo = activoVal === true || activoVal === 'TRUE' || activoVal === 'true' || activoVal === 1;
-      const tipoRaw = c[11]?.v?.toString().trim().toLowerCase() || '';
-      const tipo: 'venta' | 'alquiler' | '' =
-        tipoRaw === 'venta' ? 'venta' : tipoRaw === 'alquiler' ? 'alquiler' : '';
+    const { data, error } = await supabase
+      .from('listings')
+      .select('*, listing_images(url, position)')
+      .eq('status', 'publicado');
+
+    if (error) throw error;
+
+    const listings: Listing[] = (data ?? []).map((row: any) => {
+      const imgs = Array.isArray(row.listing_images) ? [...row.listing_images] : [];
+      imgs.sort((a, b) => {
+        const pa = a?.position ?? 0;
+        const pb = b?.position ?? 0;
+        return pa - pb;
+      });
+      const images = imgs
+        .map((i: any) => (typeof i?.url === 'string' ? i.url.trim() : ''))
+        .filter(Boolean);
 
       return {
-        id: c[0]?.v?.toString() || '',
-        titulo: c[1]?.v?.toString() || '',
-        precio: c[2]?.f || (c[2]?.v ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(Number(c[2].v)) : ''),
-        ubicacion: c[3]?.v?.toString() || '',
-        descripcion: c[4]?.v?.toString() || '',
-        habitaciones: c[5]?.v?.toString() || '',
-        banos: c[6]?.v?.toString() || '',
-        metros: c[7]?.v?.toString() || '',
-        fotos: c[8]?.v?.toString().split(',').map((url: string) => url.trim()).filter(Boolean) || [],
-        whatsapp: c[9]?.v?.toString() || '',
-        activo: isActivo,
-        tipo,
+        id: String(row.id ?? ''),
+        titulo: String(row.titulo ?? ''),
+        precio: formatPrecio(row.precio),
+        ubicacion: String(row.ubicacion ?? ''),
+        descripcion: String(row.descripcion ?? ''),
+        habitaciones: row.habitaciones == null ? '' : String(row.habitaciones),
+        banos: row.banos == null ? '' : String(row.banos),
+        metros: row.metros == null ? '' : String(row.metros),
+        whatsapp: String(row.whatsapp ?? ''),
+        tipo: normalizeTipo(row.tipo),
+        status: String(row.status ?? ''),
+        featured: row.featured === true,
+        images,
       };
     });
-    
-    const activeListings = listings.filter(l => l.activo && l.id);
-    
-    return activeListings;
-  } catch (error) {
-    console.error('Error fetching from Google Sheets:', error);
+
+    return listings.filter(l => l.id);
+  } catch (err) {
+    console.error('Error fetching listings from Supabase:', err);
     return [];
   }
 }

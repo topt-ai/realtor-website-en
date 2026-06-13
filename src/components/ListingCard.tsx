@@ -9,7 +9,7 @@ interface ListingCardProps {
 }
 
 export default function ListingCard({ listing }: ListingCardProps) {
-  const firstPhoto = listing.fotos[0] || 'https://picsum.photos/seed/house/800/600';
+  const firstPhoto = listing.images[0] || 'https://picsum.photos/seed/house/800/600';
   const listingUrl = `${window.location.origin}/propiedades/${listing.id}`;
 
   return (
