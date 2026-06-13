@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Bed, Bath, Square } from 'lucide-react';
-import { Listing } from '../lib/api';
+import { Listing, formatPrecio } from '../lib/api';
 import WhatsAppButton from './WhatsAppButton';
 
 interface ListingCardProps {
@@ -45,7 +45,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
             </h3>
           </Link>
           <p className="text-2xl font-light text-[#1A1A1A] mb-6">
-            {listing.precio}
+            {formatPrecio(listing.precio)}
           </p>
           
           <div className="flex items-center gap-6 text-[#2C2C2C] mb-8 border-t border-gray-100 pt-4">

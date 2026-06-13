@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, MapPin, Bed, Bath, Square } from 'lucide-react';
-import { useListings } from '../lib/api';
+import { useListings, formatPrecio } from '../lib/api';
 import Gallery from '../components/Gallery';
 import WhatsAppButton from '../components/WhatsAppButton';
 
@@ -150,7 +150,7 @@ export default function ListingDetail() {
               )}
               <p className="text-sm uppercase tracking-widest text-gray-500 mb-2">Precio</p>
               <p className="text-4xl md:text-5xl font-light text-[#1A1A1A] mb-10">
-                {listing.precio}
+                {formatPrecio(listing.precio)}
               </p>
               
               <div className="mb-10">
