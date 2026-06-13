@@ -15,6 +15,10 @@ export interface Listing {
   status: string;
   featured: boolean;
   images: string[];
+  property_type: string;
+  negociable: boolean;
+  sold_status: string;
+  video_url: string;
 }
 
 export function formatPrecio(precio: number): string {
@@ -56,6 +60,10 @@ export async function fetchListings(): Promise<Listing[]> {
         status: String(row.status ?? ''),
         featured: row.featured === true,
         images,
+        property_type: String(row.property_type ?? ''),
+        negociable: row.negociable === true,
+        sold_status: String(row.sold_status ?? ''),
+        video_url: String(row.video_url ?? ''),
       };
     });
 

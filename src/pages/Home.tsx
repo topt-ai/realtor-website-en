@@ -68,48 +68,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Listings */}
-      <section className="py-24 px-6 bg-[#F8F6F2]">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div>
-              <p className="text-[#C9A84C] uppercase tracking-widest text-sm mb-4">Exclusividad</p>
-              <h2 className="text-4xl md:text-5xl font-serif text-[#1A1A1A]">Propiedades Destacadas</h2>
+      {/* Featured Listings — hidden entirely when no featured listings exist */}
+      {(loading || featuredListings.length > 0) && (
+        <section className="py-24 px-6 bg-[#F8F6F2]">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+              <div>
+                <p className="text-[#C9A84C] uppercase tracking-widest text-sm mb-4">Exclusividad</p>
+                <h2 className="text-4xl md:text-5xl font-serif text-[#1A1A1A]">Propiedades Destacadas</h2>
+              </div>
+              <Link
+                to="/propiedades"
+                className="inline-flex items-center gap-2 text-[#1A1A1A] uppercase tracking-widest text-sm hover:text-[#C9A84C] transition-colors border-b border-[#1A1A1A] hover:border-[#C9A84C] pb-1"
+              >
+                Ver Todas <ArrowRight size={16} />
+              </Link>
             </div>
-            <Link 
-              to="/propiedades" 
-              className="inline-flex items-center gap-2 text-[#1A1A1A] uppercase tracking-widest text-sm hover:text-[#C9A84C] transition-colors border-b border-[#1A1A1A] hover:border-[#C9A84C] pb-1"
-            >
-              Ver Todas <ArrowRight size={16} />
-            </Link>
-          </div>
 
-          {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="animate-pulse bg-white border border-gray-100 h-[500px]">
-                  <div className="w-full h-[300px] bg-gray-200"></div>
-                  <div className="p-6">
-                    <div className="h-6 bg-gray-200 w-3/4 mb-4"></div>
-                    <div className="h-8 bg-gray-200 w-1/2 mb-8"></div>
-                    <div className="h-4 bg-gray-200 w-full"></div>
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="animate-pulse bg-white border border-gray-100 h-[500px]">
+                    <div className="w-full h-[300px] bg-gray-200"></div>
+                    <div className="p-6">
+                      <div className="h-6 bg-gray-200 w-3/4 mb-4"></div>
+                      <div className="h-8 bg-gray-200 w-1/2 mb-8"></div>
+                      <div className="h-4 bg-gray-200 w-full"></div>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : featuredListings.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredListings.map(listing => (
-                <ListingCard key={listing.id} listing={listing} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 bg-white border border-gray-100">
-              <p className="text-gray-500 font-light">No hay propiedades destacadas en este momento.</p>
-            </div>
-          )}
-        </div>
-      </section>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {featuredListings.map(listing => (
+                  <ListingCard key={listing.id} listing={listing} />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
     </div>
   );
 }

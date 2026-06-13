@@ -84,6 +84,54 @@ export default function ListingDetail() {
         <Gallery photos={listing.images} title={listing.titulo} />
       </div>
 
+      {/* Video Tour */}
+      {listing.video_url && (
+        <div className="max-w-[100rem] mx-auto px-4 sm:px-6 mb-16">
+          <p className="text-[#C9A84C] uppercase tracking-widest text-sm mb-4">Video tour</p>
+          {(() => {
+            const url = listing.video_url;
+            const isYouTube = /youtube\.com|youtu\.be/.test(url);
+            if (isYouTube) {
+              let videoId = '';
+              try {
+                const u = new URL(url);
+                if (u.hostname.includes('youtu.be')) {
+                  videoId = u.pathname.replace(/^\//, '');
+                } else {
+                  videoId = u.searchParams.get('v') || u.pathname.split('/').pop() || '';
+                }
+              } catch {
+                videoId = '';
+              }
+              const embedUrl = videoId
+                ? `https://www.youtube.com/embed/${videoId}`
+                : url;
+              return (
+                <div className="relative w-full aspect-video bg-black">
+                  <iframe
+                    src={embedUrl}
+                    title={`${listing.titulo} — Video tour`}
+                    className="absolute inset-0 w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              );
+            }
+            return (
+              <video
+                src={url}
+                controls
+                autoPlay
+                muted
+                playsInline
+                className="w-full aspect-video bg-black"
+              />
+            );
+          })()}
+        </div>
+      )}
+
       {/* Content */}
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">

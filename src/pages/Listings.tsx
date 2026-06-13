@@ -1,23 +1,75 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useListings } from '../lib/api';
 import ListingCard from '../components/ListingCard';
 
+const PROPERTY_TYPES = ['Casa', 'Apartamento', 'Terreno', 'Local Comercial', 'Oficina'];
+const TIPOS = ['venta', 'alquiler'];
+
 export default function Listings() {
   const { listings, loading, error } = useListings();
+  const [propertyType, setPropertyType] = useState<string>('');
+  const [tipo, setTipo] = useState<string>('');
 
   useEffect(() => {
     document.title = 'Propiedades | Jarvis Acevedo Real Estate';
   }, []);
 
+  const filtered = useMemo(() => {
+    return listings.filter(l => {
+      if (propertyType && l.property_type !== propertyType) return false;
+      if (tipo && l.tipo !== tipo) return false;
+      return true;
+    });
+  }, [listings, propertyType, tipo]);
+
   return (
     <div className="min-h-screen bg-[#F8F6F2] pt-12 pb-24 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16 text-center md:text-left">
+        <div className="mb-12 text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-serif text-[#1A1A1A] mb-6">Propiedades</h1>
           <p className="text-lg text-[#2C2C2C] font-light max-w-2xl">
-            Descubra nuestra exclusiva colección de propiedades en El Salvador. 
+            Descubra nuestra exclusiva colección de propiedades en El Salvador.
             Cada hogar ha sido seleccionado por su diseño excepcional y ubicación privilegiada.
           </p>
+        </div>
+
+        {/* Filters */}
+        <div className="mb-12 flex flex-col sm:flex-row gap-4 items-stretch sm:items-end">
+          <div className="flex flex-col gap-2 flex-1 sm:max-w-xs">
+            <label className="text-xs uppercase tracking-widest text-gray-500">Tipo de propiedad</label>
+            <select
+              value={propertyType}
+              onChange={e => setPropertyType(e.target.value)}
+              className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] focus:outline-none focus:border-[#C9A84C] transition-colors"
+            >
+              <option value="">Todas</option>
+              {PROPERTY_TYPES.map(pt => (
+                <option key={pt} value={pt}>{pt}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col gap-2 flex-1 sm:max-w-xs">
+            <label className="text-xs uppercase tracking-widest text-gray-500">Operación</label>
+            <select
+              value={tipo}
+              onChange={e => setTipo(e.target.value)}
+              className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] capitalize focus:outline-none focus:border-[#C9A84C] transition-colors"
+            >
+              <option value="">Todas</option>
+              {TIPOS.map(t => (
+                <option key={t} value={t} className="capitalize">{t}</option>
+              ))}
+            </select>
+          </div>
+          {(propertyType || tipo) && (
+            <button
+              type="button"
+              onClick={() => { setPropertyType(''); setTipo(''); }}
+              className="text-xs uppercase tracking-widest text-gray-500 hover:text-[#1A1A1A] transition-colors px-2 py-3 self-start sm:self-end"
+            >
+              Limpiar filtros
+            </button>
+          )}
         </div>
 
         {error && (
@@ -39,16 +91,20 @@ export default function Listings() {
               </div>
             ))}
           </div>
-        ) : listings.length > 0 ? (
+        ) : filtered.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {listings.map(listing => (
+            {filtered.map(listing => (
               <ListingCard key={listing.id} listing={listing} />
             ))}
           </div>
         ) : (
           <div className="text-center py-32 bg-white border border-gray-100">
             <h3 className="text-2xl font-serif text-[#1A1A1A] mb-4">No se encontraron propiedades</h3>
-            <p className="text-gray-500 font-light">Actualmente no hay propiedades disponibles.</p>
+            <p className="text-gray-500 font-light">
+              {propertyType || tipo
+                ? 'No hay propiedades que coincidan con los filtros seleccionados.'
+                : 'Actualmente no hay propiedades disponibles.'}
+            </p>
           </div>
         )}
       </div>
