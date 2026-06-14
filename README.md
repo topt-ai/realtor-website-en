@@ -44,7 +44,7 @@ VITE_SUPABASE_URL=https://your-project.supabase.co
 VITE_SUPABASE_ANON_KEY=eyJhbGci...
 ```
 
-These are also inlined as a fallback in [src/lib/supabase.ts](src/lib/supabase.ts) so the site won't white-screen if the env is misconfigured on the host, but you should set them properly per environment. The anon key is safe to expose in client code — security is enforced by Supabase Row Level Security policies, not by hiding this key.
+The site reads these strictly from `import.meta.env` — if either is missing at runtime, [src/lib/supabase.ts](src/lib/supabase.ts) throws on import. The anon key is safe to expose in client code — security is enforced by Supabase Row Level Security policies, not by hiding this key.
 
 ---
 
