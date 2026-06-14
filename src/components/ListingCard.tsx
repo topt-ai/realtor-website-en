@@ -10,18 +10,18 @@ interface ListingCardProps {
 
 export default function ListingCard({ listing }: ListingCardProps) {
   const firstPhoto = listing.images[0] || 'https://picsum.photos/seed/house/800/600';
-  const listingUrl = `${window.location.origin}/propiedades/${listing.id}`;
+  const listingUrl = `${window.location.origin}/properties/${listing.id}`;
 
   const soldOverlay =
-    listing.sold_status === 'Vendido'
-      ? { label: 'Vendido', bg: 'bg-red-600' }
-      : listing.sold_status === 'Alquilado'
-      ? { label: 'Alquilado', bg: 'bg-[#1E4A8B]' }
+    listing.sold_status === 'Sold'
+      ? { label: 'Sold', bg: 'bg-red-600' }
+      : listing.sold_status === 'Rented'
+      ? { label: 'Rented', bg: 'bg-[#1E4A8B]' }
       : null;
 
   return (
     <div className="group flex flex-col bg-white border border-gray-100 hover:border-[var(--primary)] transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 h-full">
-      <Link to={`/propiedades/${listing.id}`} className="block relative aspect-[4/3] overflow-hidden">
+      <Link to={`/properties/${listing.id}`} className="block relative aspect-[4/3] overflow-hidden">
         <img
           src={firstPhoto}
           alt={listing.titulo}
@@ -34,7 +34,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
         {listing.tipo && (
           <div
             className={`absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold tracking-wider uppercase border-2 ${
-              listing.tipo === 'venta'
+              listing.tipo === 'for sale'
                 ? 'border-[var(--primary)] text-[var(--primary)]'
                 : 'border-[#1E4A8B] text-[#1E4A8B]'
             }`}
@@ -64,11 +64,11 @@ export default function ListingCard({ listing }: ListingCardProps) {
             )}
             {listing.negociable && (
               <span className="text-[10px] uppercase tracking-widest bg-[var(--primary)] text-white px-2 py-0.5 rounded-full font-semibold">
-                Precio negociable
+                Price negotiable
               </span>
             )}
           </div>
-          <Link to={`/propiedades/${listing.id}`}>
+          <Link to={`/properties/${listing.id}`}>
             <h3 className="text-xl font-medium text-[#1A1A1A] mb-2 line-clamp-2 font-serif group-hover:text-[var(--primary)] transition-colors">
               {listing.titulo}
             </h3>

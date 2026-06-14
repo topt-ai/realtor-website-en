@@ -13,7 +13,7 @@ export default function WhatsAppButton({ whatsapp, titulo, pageUrl, className = 
   const cleanNumber = phoneNumber.replace(/\D/g, '');
 
   const firstName = AGENT_CONFIG.name.split(' ')[0];
-  const text = `Hola ${firstName}! Me interesa la propiedad: ${titulo} - ${pageUrl}`;
+  const text = `Hi ${firstName}! I'm interested in the property: ${titulo} - ${pageUrl}`;
   const encodedText = encodeURIComponent(text);
   const url = `https://wa.me/${cleanNumber}?text=${encodedText}`;
 
@@ -25,7 +25,7 @@ export default function WhatsAppButton({ whatsapp, titulo, pageUrl, className = 
       className={`inline-flex items-center justify-center gap-2 bg-[var(--primary)] hover:opacity-90 text-white font-medium py-3 px-6 rounded-none transition-opacity duration-300 w-full md:w-auto ${className}`}
     >
       <MessageCircle size={20} />
-      <span>Consultar por WhatsApp</span>
+      <span>Chat on WhatsApp</span>
     </a>
   );
 }

@@ -13,7 +13,7 @@ export default function Gallery({ photos, title }: GalleryProps) {
   if (!photos || photos.length === 0) {
     return (
       <div className="aspect-[16/9] md:aspect-[21/9] bg-gray-100 flex items-center justify-center">
-        <span className="text-gray-400">No hay imágenes disponibles</span>
+        <span className="text-gray-400">No images available</span>
       </div>
     );
   }

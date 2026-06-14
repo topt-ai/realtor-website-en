@@ -35,7 +35,7 @@ export async function fetchListings(): Promise<Listing[]> {
     const { data, error } = await supabase
       .from('listings')
       .select('*, listing_images(url, order_index)')
-      .eq('status', 'publicado');
+      .eq('status', 'published');
 
     if (error) throw error;
 

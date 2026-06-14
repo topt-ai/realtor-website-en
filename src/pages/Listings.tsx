@@ -3,8 +3,8 @@ import { useListings } from '../lib/api';
 import ListingCard from '../components/ListingCard';
 import { SITE_TITLE } from '../config';
 
-const PROPERTY_TYPES = ['Casa', 'Apartamento', 'Terreno', 'Local Comercial', 'Oficina'];
-const TIPOS = ['venta', 'alquiler'];
+const PROPERTY_TYPES = ['House', 'Apartment', 'Land', 'Commercial Space', 'Office'];
+const TIPOS = ['for sale', 'for rent'];
 
 export default function Listings() {
   const { listings, loading, error } = useListings();
@@ -12,7 +12,7 @@ export default function Listings() {
   const [tipo, setTipo] = useState<string>('');
 
   useEffect(() => {
-    document.title = `Propiedades | ${SITE_TITLE}`;
+    document.title = `Properties | ${SITE_TITLE}`;
   }, []);
 
   const filtered = useMemo(() => {
@@ -27,36 +27,36 @@ export default function Listings() {
     <div className="min-h-screen bg-[#F8F6F2] pt-12 pb-24 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 text-center md:text-left">
-          <h1 className="text-4xl md:text-6xl font-serif text-[#1A1A1A] mb-6">Propiedades</h1>
+          <h1 className="text-4xl md:text-6xl font-serif text-[#1A1A1A] mb-6">Properties</h1>
           <p className="text-lg text-[#2C2C2C] font-light max-w-2xl">
-            Descubra nuestra exclusiva colección de propiedades en El Salvador.
-            Cada hogar ha sido seleccionado por su diseño excepcional y ubicación privilegiada.
+            Discover our exclusive collection of properties.
+            Each home has been selected for its exceptional design and prime location.
           </p>
         </div>
 
         {/* Filters */}
         <div className="mb-12 flex flex-col sm:flex-row gap-4 items-stretch sm:items-end">
           <div className="flex flex-col gap-2 flex-1 sm:max-w-xs">
-            <label className="text-xs uppercase tracking-widest text-gray-500">Tipo de propiedad</label>
+            <label className="text-xs uppercase tracking-widest text-gray-500">Property type</label>
             <select
               value={propertyType}
               onChange={e => setPropertyType(e.target.value)}
               className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] focus:outline-none focus:border-[var(--primary)] transition-colors"
             >
-              <option value="">Todas</option>
+              <option value="">All</option>
               {PROPERTY_TYPES.map(pt => (
                 <option key={pt} value={pt}>{pt}</option>
               ))}
             </select>
           </div>
           <div className="flex flex-col gap-2 flex-1 sm:max-w-xs">
-            <label className="text-xs uppercase tracking-widest text-gray-500">Operación</label>
+            <label className="text-xs uppercase tracking-widest text-gray-500">Listing type</label>
             <select
               value={tipo}
               onChange={e => setTipo(e.target.value)}
               className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] capitalize focus:outline-none focus:border-[var(--primary)] transition-colors"
             >
-              <option value="">Todas</option>
+              <option value="">All</option>
               {TIPOS.map(t => (
                 <option key={t} value={t} className="capitalize">{t}</option>
               ))}
@@ -68,14 +68,14 @@ export default function Listings() {
               onClick={() => { setPropertyType(''); setTipo(''); }}
               className="text-xs uppercase tracking-widest text-gray-500 hover:text-[#1A1A1A] transition-colors px-2 py-3 self-start sm:self-end"
             >
-              Limpiar filtros
+              Clear filters
             </button>
           )}
         </div>
 
         {error && (
           <div className="bg-red-50 text-red-600 p-6 border border-red-100 mb-12">
-            <p>Hubo un error al cargar las propiedades. Por favor, intente de nuevo más tarde.</p>
+            <p>There was an error loading the properties. Please try again later.</p>
           </div>
         )}
 
@@ -100,11 +100,11 @@ export default function Listings() {
           </div>
         ) : (
           <div className="text-center py-32 bg-white border border-gray-100">
-            <h3 className="text-2xl font-serif text-[#1A1A1A] mb-4">No se encontraron propiedades</h3>
+            <h3 className="text-2xl font-serif text-[#1A1A1A] mb-4">No properties found</h3>
             <p className="text-gray-500 font-light">
               {propertyType || tipo
-                ? 'No hay propiedades que coincidan con los filtros seleccionados.'
-                : 'Actualmente no hay propiedades disponibles.'}
+                ? 'No properties match the selected filters.'
+                : 'No properties are currently available.'}
             </p>
           </div>
         )}

@@ -36,11 +36,11 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 leading-tight">
             {AGENT_CONFIG.tagline}.
           </h1>
-          <Link 
-            to="/propiedades" 
+          <Link
+            to="/properties"
             className="inline-flex items-center gap-3 bg-white text-[#1A1A1A] px-8 py-4 uppercase tracking-widest text-sm hover:bg-[var(--primary)] hover:text-white transition-colors duration-300"
           >
-            Ver Propiedades <ArrowRight size={18} />
+            View Properties <ArrowRight size={18} />
           </Link>
         </div>
       </section>
@@ -49,7 +49,7 @@ export default function Home() {
       <section className="py-24 md:py-32 px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-5xl font-serif mb-10 text-[#1A1A1A]">
-            Experiencia local.<br/>Servicio de clase mundial.
+            Local expertise.<br/>World-class service.
           </h2>
           <p className="text-lg md:text-xl text-[#2C2C2C] font-light leading-relaxed">
             {AGENT_CONFIG.bio}
@@ -62,7 +62,7 @@ export default function Home() {
               referrerPolicy="no-referrer"
             />
             <p className="mt-6 font-serif text-xl">{AGENT_CONFIG.name}</p>
-            <p className="text-[var(--primary)] uppercase tracking-widest text-xs mt-2">Fundador y Agente Principal</p>
+            <p className="text-[var(--primary)] uppercase tracking-widest text-xs mt-2">Founder & Lead Agent</p>
           </div>
         </div>
       </section>
@@ -73,14 +73,14 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
               <div>
-                <p className="text-[var(--primary)] uppercase tracking-widest text-sm mb-4">Exclusividad</p>
-                <h2 className="text-4xl md:text-5xl font-serif text-[#1A1A1A]">Propiedades Destacadas</h2>
+                <p className="text-[var(--primary)] uppercase tracking-widest text-sm mb-4">Exclusivity</p>
+                <h2 className="text-4xl md:text-5xl font-serif text-[#1A1A1A]">Featured Properties</h2>
               </div>
               <Link
-                to="/propiedades"
+                to="/properties"
                 className="inline-flex items-center gap-2 text-[#1A1A1A] uppercase tracking-widest text-sm hover:text-[var(--primary)] transition-colors border-b border-[#1A1A1A] hover:border-[var(--primary)] pb-1"
               >
-                Ver Todas <ArrowRight size={16} />
+                View All <ArrowRight size={16} />
               </Link>
             </div>
 

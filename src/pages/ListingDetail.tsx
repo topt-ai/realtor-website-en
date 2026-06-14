@@ -39,15 +39,15 @@ export default function ListingDetail() {
   if (error || !listing) {
     return (
       <div className="min-h-screen bg-[#F8F6F2] flex items-center justify-center px-6">
-        <title>{`Propiedad no encontrada | ${SITE_TITLE}`}</title>
+        <title>{`Property not found | ${SITE_TITLE}`}</title>
         <div className="text-center">
-          <h1 className="text-4xl font-serif text-[#1A1A1A] mb-6">Propiedad no encontrada</h1>
-          <p className="text-[#2C2C2C] font-light mb-8">La propiedad que busca no existe o ya no está disponible.</p>
-          <Link 
-            to="/propiedades" 
+          <h1 className="text-4xl font-serif text-[#1A1A1A] mb-6">Property not found</h1>
+          <p className="text-[#2C2C2C] font-light mb-8">The property you're looking for doesn't exist or is no longer available.</p>
+          <Link
+            to="/properties"
             className="inline-flex items-center gap-2 text-[#1A1A1A] uppercase tracking-widest text-sm border-b border-[#1A1A1A] pb-1"
           >
-            <ArrowLeft size={16} /> Volver a propiedades
+            <ArrowLeft size={16} /> Back to properties
           </Link>
         </div>
       </div>
@@ -72,11 +72,11 @@ export default function ListingDetail() {
 
       {/* Back Link */}
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <Link 
-          to="/propiedades" 
+        <Link
+          to="/properties"
           className="inline-flex items-center gap-2 text-gray-500 hover:text-[#1A1A1A] uppercase tracking-widest text-xs transition-colors"
         >
-          <ArrowLeft size={14} /> Volver a propiedades
+          <ArrowLeft size={14} /> Back to properties
         </Link>
       </div>
 
@@ -88,7 +88,7 @@ export default function ListingDetail() {
       {/* Video Tour */}
       {listing.video_url && (
         <div className="max-w-[100rem] mx-auto px-4 sm:px-6 mb-16">
-          <p className="text-[var(--primary)] uppercase tracking-widest text-sm mb-4">Video tour</p>
+          <p className="text-[var(--primary)] uppercase tracking-widest text-sm mb-4">Video Tour</p>
           {(() => {
             const url = listing.video_url;
             const isYouTube = /youtube\.com|youtu\.be/.test(url);
@@ -153,7 +153,7 @@ export default function ListingDetail() {
                   <Bed size={24} className="text-[var(--primary)]" />
                   <div>
                     <p className="text-xl font-light">{listing.habitaciones}</p>
-                    <p className="text-xs uppercase tracking-widest text-gray-500">Habitaciones</p>
+                    <p className="text-xs uppercase tracking-widest text-gray-500">Bedrooms</p>
                   </div>
                 </div>
                 <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
@@ -161,7 +161,7 @@ export default function ListingDetail() {
                   <Bath size={24} className="text-[var(--primary)]" />
                   <div>
                     <p className="text-xl font-light">{listing.banos}</p>
-                    <p className="text-xs uppercase tracking-widest text-gray-500">Baños</p>
+                    <p className="text-xs uppercase tracking-widest text-gray-500">Bathrooms</p>
                   </div>
                 </div>
                 <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
@@ -169,14 +169,14 @@ export default function ListingDetail() {
                   <Square size={24} className="text-[var(--primary)]" />
                   <div>
                     <p className="text-xl font-light">{listing.metros}</p>
-                    <p className="text-xs uppercase tracking-widest text-gray-500">Metros</p>
+                    <p className="text-xs uppercase tracking-widest text-gray-500">Sq Ft</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="prose prose-lg max-w-none text-[#2C2C2C] font-light leading-relaxed">
-              <h3 className="text-2xl font-serif text-[#1A1A1A] mb-6">Descripción</h3>
+              <h3 className="text-2xl font-serif text-[#1A1A1A] mb-6">Description</h3>
               {listing.descripcion.split('\n').map((paragraph, idx) => (
                 <p key={idx} className="mb-4">{paragraph}</p>
               ))}
@@ -189,7 +189,7 @@ export default function ListingDetail() {
               {listing.tipo && (
                 <div
                   className={`inline-block rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border-2 mb-4 ${
-                    listing.tipo === 'venta'
+                    listing.tipo === 'for sale'
                       ? 'border-[var(--primary)] text-[var(--primary)]'
                       : 'border-[#1E4A8B] text-[#1E4A8B]'
                   }`}
@@ -197,14 +197,14 @@ export default function ListingDetail() {
                   {listing.tipo}
                 </div>
               )}
-              <p className="text-sm uppercase tracking-widest text-gray-500 mb-2">Precio</p>
+              <p className="text-sm uppercase tracking-widest text-gray-500 mb-2">Price</p>
               <p className="text-4xl md:text-5xl font-light text-[#1A1A1A] mb-10">
                 {formatPrecio(listing.precio)}
               </p>
               
               <div className="mb-10">
                 <p className="text-sm text-[#2C2C2C] mb-6 font-light">
-                  ¿Interesado en esta propiedad? Contáctenos directamente por WhatsApp para programar una visita o solicitar más información.
+                  Interested in this property? Contact us directly via WhatsApp to schedule a visit or request more information.
                 </p>
                 <WhatsAppButton 
                   whatsapp={listing.whatsapp}
@@ -223,7 +223,7 @@ export default function ListingDetail() {
                 />
                 <div>
                   <p className="font-serif text-lg text-[#1A1A1A]">{AGENT_CONFIG.name}</p>
-                  <p className="text-xs uppercase tracking-widest text-[var(--primary)]">Agente Principal</p>
+                  <p className="text-xs uppercase tracking-widest text-[var(--primary)]">Lead Agent</p>
                 </div>
               </div>
             </div>

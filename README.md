@@ -64,12 +64,12 @@ The site expects two tables:
 | `banos`         | integer |                                                    |
 | `metros`        | text    | free-form (e.g. "350 m²")                          |
 | `whatsapp`      | text    | per-listing override; falls back to `AGENT_CONFIG.whatsapp` |
-| `tipo`          | text    | `venta` \| `alquiler`                              |
-| `status`        | text    | only `publicado` listings are fetched              |
+| `tipo`          | text    | `for sale` \| `for rent`                           |
+| `status`        | text    | only `published` listings are fetched              |
 | `featured`      | boolean | shown on the homepage section                      |
-| `property_type` | text    | `Casa` \| `Apartamento` \| `Terreno` \| `Local Comercial` \| `Oficina` |
-| `negociable`    | boolean | renders the "Precio negociable" pill               |
-| `sold_status`   | text    | `Disponible` \| `Vendido` \| `Alquilado`           |
+| `property_type` | text    | `House` \| `Apartment` \| `Land` \| `Commercial Space` \| `Office` |
+| `negociable`    | boolean | renders the "Price negotiable" pill                |
+| `sold_status`   | text    | `Available` \| `Sold` \| `Rented`                  |
 | `video_url`     | text    | YouTube URL or direct video file                   |
 
 **`listing_images`**
@@ -117,7 +117,7 @@ To give a new agent access to their own row-level admin in the Supabase portal:
    create policy "public reads published listings"
      on listings for select
      to anon
-     using (status = 'publicado');
+     using (status = 'published');
    ```
 4. Share the portal URL configured in `AGENT_CONFIG.portal` — the agent signs in there to manage their listings without touching this repo.
 
@@ -139,8 +139,8 @@ src/
     Gallery.tsx          ← photo gallery on detail page
   pages/
     Home.tsx             ← hero + about + featured section
-    Listings.tsx         ← /propiedades with property_type & tipo filters
-    ListingDetail.tsx    ← /propiedades/:id with video tour
+    Listings.tsx         ← /properties with property_type & tipo filters
+    ListingDetail.tsx    ← /properties/:id with video tour
 ```
 
 ---
