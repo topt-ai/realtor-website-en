@@ -3,8 +3,17 @@ import { useListings } from '../lib/api';
 import ListingCard from '../components/ListingCard';
 import { SITE_TITLE } from '../config';
 
-const PROPERTY_TYPES = ['House', 'Apartment', 'Land', 'Commercial Space', 'Office'];
-const TIPOS = ['for sale', 'for rent'];
+const PROPERTY_TYPES: { value: string; label: string }[] = [
+  { value: 'casa', label: 'House' },
+  { value: 'apartamento', label: 'Apartment' },
+  { value: 'terreno', label: 'Land' },
+  { value: 'local comercial', label: 'Commercial Space' },
+  { value: 'oficina', label: 'Office' },
+];
+const TIPOS: { value: string; label: string }[] = [
+  { value: 'venta', label: 'For Sale' },
+  { value: 'alquiler', label: 'For Rent' },
+];
 
 export default function Listings() {
   const { listings, loading, error } = useListings();
@@ -17,7 +26,7 @@ export default function Listings() {
 
   const filtered = useMemo(() => {
     return listings.filter(l => {
-      if (propertyType && l.property_type !== propertyType) return false;
+      if (propertyType && l.property_type?.toLowerCase() !== propertyType) return false;
       if (tipo && l.tipo !== tipo) return false;
       return true;
     });
@@ -45,7 +54,7 @@ export default function Listings() {
             >
               <option value="">All</option>
               {PROPERTY_TYPES.map(pt => (
-                <option key={pt} value={pt}>{pt}</option>
+                <option key={pt.value} value={pt.value}>{pt.label}</option>
               ))}
             </select>
           </div>
@@ -54,11 +63,11 @@ export default function Listings() {
             <select
               value={tipo}
               onChange={e => setTipo(e.target.value)}
-              className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] capitalize focus:outline-none focus:border-[var(--primary)] transition-colors"
+              className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] focus:outline-none focus:border-[var(--primary)] transition-colors"
             >
               <option value="">All</option>
               {TIPOS.map(t => (
-                <option key={t} value={t} className="capitalize">{t}</option>
+                <option key={t.value} value={t.value}>{t.label}</option>
               ))}
             </select>
           </div>

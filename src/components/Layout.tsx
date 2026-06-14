@@ -1,7 +1,7 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Menu, X, Smartphone, MessageCircle, Search } from 'lucide-react';
-import { AGENT_CONFIG, BRAND_MARK, SITE_TITLE, formatPhoneDisplay } from '../config';
+import { AGENT_CONFIG, BRAND_MARK, SITE_TITLE } from '../config';
 
 export default function Layout() {
   const [isBannerVisible, setIsBannerVisible] = useState(true);
@@ -75,8 +75,8 @@ export default function Layout() {
           <div className="bg-[#1A1A1A] text-white py-2 px-4 flex justify-between items-center text-xs md:text-sm shadow-sm relative z-30">
             <div className="mx-auto text-center flex-1 pr-4">
               This is a demo site. The properties shown are for demonstration only. Want one like this for your business?{' '}
-              <a href="mailto:hello@thecitadl.com" className="text-[var(--primary)] hover:underline inline-block mt-1 md:mt-0 md:ml-1 font-medium">
-                → hello@thecitadl.com
+              <a href="https://cal.com/the-citadl/discovery-call" target="_blank" rel="noopener noreferrer" className="text-[var(--primary)] hover:underline inline-block mt-1 md:mt-0 md:ml-1 font-medium">
+                → Book a free discovery call
               </a>
             </div>
             <button onClick={() => setIsBannerVisible(false)} className="text-gray-400 hover:text-white flex-shrink-0" aria-label="Close banner">
@@ -133,7 +133,9 @@ export default function Layout() {
           </div>
 
           <a
-            href="mailto:hello@thecitadl.com"
+            href="https://cal.com/the-citadl/discovery-call"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block bg-[var(--primary)] text-white px-8 py-4 uppercase tracking-widest text-sm hover:opacity-90 transition-opacity"
           >
             I want my website
@@ -156,9 +158,6 @@ export default function Layout() {
           <div>
             <h4 className="text-sm uppercase tracking-widest mb-6 text-[var(--primary)]">Contact</h4>
             <div className="flex flex-col gap-4 text-gray-400 font-light">
-              <a href={`https://wa.me/${cleanWhatsapp}`} className="hover:text-white transition-colors">
-                {formatPhoneDisplay(AGENT_CONFIG.whatsapp)}
-              </a>
               <a href="mailto:hello@thecitadl.com" className="hover:text-white transition-colors">
                 hello@thecitadl.com
               </a>
@@ -172,7 +171,7 @@ export default function Layout() {
             &copy; {new Date().getFullYear()} {SITE_TITLE}. Demo site — the properties shown are fictitious.
           </p>
           <p className="text-xs text-gray-500">
-            Demo site created by The Citadl — https://thecitadl.com
+            Demo site created by <a href="https://www.thecitadl.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline">The Citadl</a>
           </p>
         </div>
       </footer>

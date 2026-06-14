@@ -7,8 +7,8 @@ export interface Listing {
   precio: number;
   ubicacion: string;
   descripcion: string;
-  habitaciones: number;
-  banos: number;
+  habitaciones: number | null;
+  banos: number | null;
   metros: string;
   whatsapp: string;
   tipo: string;
@@ -35,7 +35,7 @@ export async function fetchListings(): Promise<Listing[]> {
     const { data, error } = await supabase
       .from('listings')
       .select('*, listing_images(url, order_index)')
-      .eq('status', 'published');
+      .eq('status', 'publicado');
 
     if (error) throw error;
 
@@ -52,8 +52,8 @@ export async function fetchListings(): Promise<Listing[]> {
         precio: Number(row.precio ?? 0),
         ubicacion: String(row.ubicacion ?? ''),
         descripcion: String(row.descripcion ?? ''),
-        habitaciones: Number(row.habitaciones ?? 0),
-        banos: Number(row.banos ?? 0),
+        habitaciones: row.habitaciones == null ? null : Number(row.habitaciones),
+        banos: row.banos == null ? null : Number(row.banos),
         metros: row.metros == null ? '' : String(row.metros),
         whatsapp: String(row.whatsapp ?? ''),
         tipo: String(row.tipo ?? ''),

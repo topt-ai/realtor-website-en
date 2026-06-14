@@ -149,29 +149,39 @@ export default function ListingDetail() {
               </h1>
               
               <div className="flex flex-wrap items-center gap-8 py-6 border-y border-gray-100 text-[#2C2C2C]">
-                <div className="flex items-center gap-3">
-                  <Bed size={24} className="text-[var(--primary)]" />
-                  <div>
-                    <p className="text-xl font-light">{listing.habitaciones}</p>
-                    <p className="text-xs uppercase tracking-widest text-gray-500">Bedrooms</p>
+                {listing.habitaciones != null && (
+                  <div className="flex items-center gap-3">
+                    <Bed size={24} className="text-[var(--primary)]" />
+                    <div>
+                      <p className="text-xl font-light">{listing.habitaciones}</p>
+                      <p className="text-xs uppercase tracking-widest text-gray-500">Bedrooms</p>
+                    </div>
                   </div>
-                </div>
-                <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
-                <div className="flex items-center gap-3">
-                  <Bath size={24} className="text-[var(--primary)]" />
-                  <div>
-                    <p className="text-xl font-light">{listing.banos}</p>
-                    <p className="text-xs uppercase tracking-widest text-gray-500">Bathrooms</p>
-                  </div>
-                </div>
-                <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
-                <div className="flex items-center gap-3">
-                  <Square size={24} className="text-[var(--primary)]" />
-                  <div>
-                    <p className="text-xl font-light">{listing.metros}</p>
-                    <p className="text-xs uppercase tracking-widest text-gray-500">Sq Ft</p>
-                  </div>
-                </div>
+                )}
+                {listing.banos != null && (
+                  <>
+                    <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
+                    <div className="flex items-center gap-3">
+                      <Bath size={24} className="text-[var(--primary)]" />
+                      <div>
+                        <p className="text-xl font-light">{listing.banos}</p>
+                        <p className="text-xs uppercase tracking-widest text-gray-500">Bathrooms</p>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {listing.metros && (
+                  <>
+                    <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
+                    <div className="flex items-center gap-3">
+                      <Square size={24} className="text-[var(--primary)]" />
+                      <div>
+                        <p className="text-xl font-light">{listing.metros}</p>
+                        <p className="text-xs uppercase tracking-widest text-gray-500">Sq Ft</p>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
@@ -189,12 +199,12 @@ export default function ListingDetail() {
               {listing.tipo && (
                 <div
                   className={`inline-block rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border-2 mb-4 ${
-                    listing.tipo === 'for sale'
+                    listing.tipo === 'venta'
                       ? 'border-[var(--primary)] text-[var(--primary)]'
                       : 'border-[#1E4A8B] text-[#1E4A8B]'
                   }`}
                 >
-                  {listing.tipo}
+                  {listing.tipo === 'venta' ? 'For Sale' : listing.tipo === 'alquiler' ? 'For Rent' : listing.tipo}
                 </div>
               )}
               <p className="text-sm uppercase tracking-widest text-gray-500 mb-2">Price</p>

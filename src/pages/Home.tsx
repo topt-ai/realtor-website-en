@@ -20,9 +20,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1715742634813-e13fc96d9195?q=80&w=3132&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-            alt="Luxury Home" 
+          <img
+            src="/hero-bg.jpg"
+            alt="Luxury Home"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
           />

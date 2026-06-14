@@ -13,11 +13,26 @@ export default function ListingCard({ listing }: ListingCardProps) {
   const listingUrl = `${window.location.origin}/properties/${listing.id}`;
 
   const soldOverlay =
-    listing.sold_status === 'Sold'
+    listing.sold_status === 'vendido'
       ? { label: 'Sold', bg: 'bg-red-600' }
-      : listing.sold_status === 'Rented'
+      : listing.sold_status === 'alquilado'
       ? { label: 'Rented', bg: 'bg-[#1E4A8B]' }
       : null;
+
+  const tipoLabel =
+    listing.tipo === 'venta'
+      ? 'For Sale'
+      : listing.tipo === 'alquiler'
+      ? 'For Rent'
+      : listing.tipo;
+
+  const propertyTypeLabel: Record<string, string> = {
+    casa: 'House',
+    apartamento: 'Apartment',
+    terreno: 'Land',
+    'local comercial': 'Commercial Space',
+    oficina: 'Office',
+  };
 
   return (
     <div className="group flex flex-col bg-white border border-gray-100 hover:border-[var(--primary)] transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 h-full">
@@ -34,12 +49,12 @@ export default function ListingCard({ listing }: ListingCardProps) {
         {listing.tipo && (
           <div
             className={`absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold tracking-wider uppercase border-2 ${
-              listing.tipo === 'for sale'
+              listing.tipo === 'venta'
                 ? 'border-[var(--primary)] text-[var(--primary)]'
                 : 'border-[#1E4A8B] text-[#1E4A8B]'
             }`}
           >
-            {listing.tipo}
+            {tipoLabel}
           </div>
         )}
         {soldOverlay && (
@@ -59,7 +74,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
           <div className="flex items-center gap-2 mb-3 flex-wrap">
             {listing.property_type && (
               <span className="text-[10px] uppercase tracking-widest text-gray-500 border border-gray-200 px-2 py-0.5">
-                {listing.property_type}
+                {propertyTypeLabel[listing.property_type.toLowerCase()] ?? listing.property_type}
               </span>
             )}
             {listing.negociable && (
@@ -78,18 +93,24 @@ export default function ListingCard({ listing }: ListingCardProps) {
           </p>
 
           <div className="flex items-center gap-6 text-[#2C2C2C] mb-8 border-t border-gray-100 pt-4">
-            <div className="flex items-center gap-2">
-              <Bed size={18} className="text-[var(--primary)]" />
-              <span className="text-sm">{listing.habitaciones}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Bath size={18} className="text-[var(--primary)]" />
-              <span className="text-sm">{listing.banos}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Square size={18} className="text-[var(--primary)]" />
-              <span className="text-sm">{listing.metros}</span>
-            </div>
+            {listing.habitaciones != null && (
+              <div className="flex items-center gap-2">
+                <Bed size={18} className="text-[var(--primary)]" />
+                <span className="text-sm">{listing.habitaciones}</span>
+              </div>
+            )}
+            {listing.banos != null && (
+              <div className="flex items-center gap-2">
+                <Bath size={18} className="text-[var(--primary)]" />
+                <span className="text-sm">{listing.banos}</span>
+              </div>
+            )}
+            {listing.metros && (
+              <div className="flex items-center gap-2">
+                <Square size={18} className="text-[var(--primary)]" />
+                <span className="text-sm">{listing.metros}</span>
+              </div>
+            )}
           </div>
         </div>
 
