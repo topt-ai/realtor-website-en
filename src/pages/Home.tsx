@@ -3,12 +3,13 @@ import { ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
 import { useListings } from '../lib/api';
 import ListingCard from '../components/ListingCard';
+import { AGENT_CONFIG, SITE_TITLE } from '../config';
 
 export default function Home() {
   const { listings, loading } = useListings();
-  
+
   useEffect(() => {
-    document.title = 'Jarvis Acevedo Real Estate';
+    document.title = SITE_TITLE;
   }, []);
 
   // Featured listings (flagged via Supabase `featured = true`)
@@ -29,15 +30,15 @@ export default function Home() {
         </div>
         
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto mt-16">
-          <p className="text-[#C9A84C] uppercase tracking-[0.3em] text-sm md:text-base mb-6 font-medium">
-            Jarvis Real Estate
+          <p className="text-[var(--primary)] uppercase tracking-[0.3em] text-sm md:text-base mb-6 font-medium">
+            {SITE_TITLE}
           </p>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 leading-tight">
-            Encontrando el hogar <br className="hidden md:block"/> que mereces.
+            {AGENT_CONFIG.tagline}.
           </h1>
           <Link 
             to="/propiedades" 
-            className="inline-flex items-center gap-3 bg-white text-[#1A1A1A] px-8 py-4 uppercase tracking-widest text-sm hover:bg-[#C9A84C] hover:text-white transition-colors duration-300"
+            className="inline-flex items-center gap-3 bg-white text-[#1A1A1A] px-8 py-4 uppercase tracking-widest text-sm hover:bg-[var(--primary)] hover:text-white transition-colors duration-300"
           >
             Ver Propiedades <ArrowRight size={18} />
           </Link>
@@ -51,19 +52,17 @@ export default function Home() {
             Experiencia local.<br/>Servicio de clase mundial.
           </h2>
           <p className="text-lg md:text-xl text-[#2C2C2C] font-light leading-relaxed">
-            Con más de 10 años de experiencia en las propiedades más exclusivas de El Salvador, 
-            Jarvis Acevedo combina experiencia local con un servicio de clase mundial. Ya sea que 
-            esté comprando su primera casa o invirtiendo en bienes raíces de lujo, Jarvis es su guía de confianza.
+            {AGENT_CONFIG.bio}
           </p>
           <div className="mt-12">
-            <img 
-              src="/tommyaboutus.webp" 
-              alt="Jarvis Acevedo" 
+            <img
+              src={AGENT_CONFIG.logo}
+              alt={AGENT_CONFIG.name}
               className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto border-4 border-[#F8F6F2]"
               referrerPolicy="no-referrer"
             />
-            <p className="mt-6 font-serif text-xl">Jarvis Acevedo</p>
-            <p className="text-[#C9A84C] uppercase tracking-widest text-xs mt-2">Fundador y Agente Principal</p>
+            <p className="mt-6 font-serif text-xl">{AGENT_CONFIG.name}</p>
+            <p className="text-[var(--primary)] uppercase tracking-widest text-xs mt-2">Fundador y Agente Principal</p>
           </div>
         </div>
       </section>
@@ -74,12 +73,12 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
               <div>
-                <p className="text-[#C9A84C] uppercase tracking-widest text-sm mb-4">Exclusividad</p>
+                <p className="text-[var(--primary)] uppercase tracking-widest text-sm mb-4">Exclusividad</p>
                 <h2 className="text-4xl md:text-5xl font-serif text-[#1A1A1A]">Propiedades Destacadas</h2>
               </div>
               <Link
                 to="/propiedades"
-                className="inline-flex items-center gap-2 text-[#1A1A1A] uppercase tracking-widest text-sm hover:text-[#C9A84C] transition-colors border-b border-[#1A1A1A] hover:border-[#C9A84C] pb-1"
+                className="inline-flex items-center gap-2 text-[#1A1A1A] uppercase tracking-widest text-sm hover:text-[var(--primary)] transition-colors border-b border-[#1A1A1A] hover:border-[var(--primary)] pb-1"
               >
                 Ver Todas <ArrowRight size={16} />
               </Link>

@@ -1,5 +1,5 @@
 {
-  "name": "Jarvis Real Estate",
-  "description": "A premium real estate agent personal website for Jarvis Mendez, featuring luxury properties in El Salvador.",
+  "name": "Real Estate",
+  "description": "A premium real estate agent personal website template. Configure src/config.ts to brand it for a specific agent.",
   "requestFramePermissions": []
 }

@@ -3,6 +3,7 @@ import { ArrowLeft, MapPin, Bed, Bath, Square } from 'lucide-react';
 import { useListings, formatPrecio } from '../lib/api';
 import Gallery from '../components/Gallery';
 import WhatsAppButton from '../components/WhatsAppButton';
+import { AGENT_CONFIG, SITE_TITLE } from '../config';
 
 export default function ListingDetail() {
   const { id } = useParams<{ id: string }>();
@@ -38,7 +39,7 @@ export default function ListingDetail() {
   if (error || !listing) {
     return (
       <div className="min-h-screen bg-[#F8F6F2] flex items-center justify-center px-6">
-        <title>Propiedad no encontrada | Jarvis Acevedo Real Estate</title>
+        <title>{`Propiedad no encontrada | ${SITE_TITLE}`}</title>
         <div className="text-center">
           <h1 className="text-4xl font-serif text-[#1A1A1A] mb-6">Propiedad no encontrada</h1>
           <p className="text-[#2C2C2C] font-light mb-8">La propiedad que busca no existe o ya no está disponible.</p>
@@ -57,15 +58,15 @@ export default function ListingDetail() {
 
   return (
     <div className="min-h-screen bg-white pb-24">
-      <title>{listing.titulo} | Jarvis Acevedo Real Estate</title>
+      <title>{`${listing.titulo} | ${SITE_TITLE}`}</title>
       <meta name="description" content={listing.descripcion.substring(0, 160)} />
-      <meta property="og:title" content={`${listing.titulo} | Jarvis Acevedo Real Estate`} />
+      <meta property="og:title" content={`${listing.titulo} | ${SITE_TITLE}`} />
       <meta property="og:description" content={listing.descripcion.substring(0, 160)} />
       <meta property="og:image" content={listing.images[0] || 'https://picsum.photos/seed/luxuryhome/1200/630'} />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={`${listing.titulo} | Jarvis Acevedo Real Estate`} />
+      <meta name="twitter:title" content={`${listing.titulo} | ${SITE_TITLE}`} />
       <meta name="twitter:description" content={listing.descripcion.substring(0, 160)} />
       <meta name="twitter:image" content={listing.images[0] || 'https://picsum.photos/seed/luxuryhome/1200/630'} />
 
@@ -87,7 +88,7 @@ export default function ListingDetail() {
       {/* Video Tour */}
       {listing.video_url && (
         <div className="max-w-[100rem] mx-auto px-4 sm:px-6 mb-16">
-          <p className="text-[#C9A84C] uppercase tracking-widest text-sm mb-4">Video tour</p>
+          <p className="text-[var(--primary)] uppercase tracking-widest text-sm mb-4">Video tour</p>
           {(() => {
             const url = listing.video_url;
             const isYouTube = /youtube\.com|youtu\.be/.test(url);
@@ -139,7 +140,7 @@ export default function ListingDetail() {
           {/* Main Details */}
           <div className="lg:col-span-8">
             <div className="mb-12">
-              <div className="flex items-center gap-2 text-[#C9A84C] mb-4">
+              <div className="flex items-center gap-2 text-[var(--primary)] mb-4">
                 <MapPin size={18} />
                 <span className="uppercase tracking-widest text-sm font-medium">{listing.ubicacion}</span>
               </div>
@@ -149,7 +150,7 @@ export default function ListingDetail() {
               
               <div className="flex flex-wrap items-center gap-8 py-6 border-y border-gray-100 text-[#2C2C2C]">
                 <div className="flex items-center gap-3">
-                  <Bed size={24} className="text-[#C9A84C]" />
+                  <Bed size={24} className="text-[var(--primary)]" />
                   <div>
                     <p className="text-xl font-light">{listing.habitaciones}</p>
                     <p className="text-xs uppercase tracking-widest text-gray-500">Habitaciones</p>
@@ -157,7 +158,7 @@ export default function ListingDetail() {
                 </div>
                 <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
                 <div className="flex items-center gap-3">
-                  <Bath size={24} className="text-[#C9A84C]" />
+                  <Bath size={24} className="text-[var(--primary)]" />
                   <div>
                     <p className="text-xl font-light">{listing.banos}</p>
                     <p className="text-xs uppercase tracking-widest text-gray-500">Baños</p>
@@ -165,7 +166,7 @@ export default function ListingDetail() {
                 </div>
                 <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
                 <div className="flex items-center gap-3">
-                  <Square size={24} className="text-[#C9A84C]" />
+                  <Square size={24} className="text-[var(--primary)]" />
                   <div>
                     <p className="text-xl font-light">{listing.metros}</p>
                     <p className="text-xs uppercase tracking-widest text-gray-500">Metros</p>
@@ -189,7 +190,7 @@ export default function ListingDetail() {
                 <div
                   className={`inline-block rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border-2 mb-4 ${
                     listing.tipo === 'venta'
-                      ? 'border-[#C9A84C] text-[#C9A84C]'
+                      ? 'border-[var(--primary)] text-[var(--primary)]'
                       : 'border-[#1E4A8B] text-[#1E4A8B]'
                   }`}
                 >
@@ -214,15 +215,15 @@ export default function ListingDetail() {
               </div>
               
               <div className="border-t border-gray-200 pt-8 mt-8 flex items-center gap-4">
-                <img 
-                  src="/tommyaboutus.webp" 
-                  alt="Jarvis Acevedo" 
+                <img
+                  src={AGENT_CONFIG.logo}
+                  alt={AGENT_CONFIG.name}
                   className="w-16 h-16 rounded-full object-cover"
                   referrerPolicy="no-referrer"
                 />
                 <div>
-                  <p className="font-serif text-lg text-[#1A1A1A]">Jarvis Acevedo</p>
-                  <p className="text-xs uppercase tracking-widest text-[#C9A84C]">Agente Principal</p>
+                  <p className="font-serif text-lg text-[#1A1A1A]">{AGENT_CONFIG.name}</p>
+                  <p className="text-xs uppercase tracking-widest text-[var(--primary)]">Agente Principal</p>
                 </div>
               </div>
             </div>

@@ -68,7 +68,7 @@ export default function Gallery({ photos, title }: GalleryProps) {
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`relative flex-shrink-0 w-24 h-16 overflow-hidden transition-all duration-300 ${
-                idx === currentIndex ? 'ring-2 ring-[#C9A84C] opacity-100' : 'opacity-60 hover:opacity-100'
+                idx === currentIndex ? 'ring-2 ring-[var(--primary)] opacity-100' : 'opacity-60 hover:opacity-100'
               }`}
             >
               <img 

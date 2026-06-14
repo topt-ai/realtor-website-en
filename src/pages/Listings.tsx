@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useListings } from '../lib/api';
 import ListingCard from '../components/ListingCard';
+import { SITE_TITLE } from '../config';
 
 const PROPERTY_TYPES = ['Casa', 'Apartamento', 'Terreno', 'Local Comercial', 'Oficina'];
 const TIPOS = ['venta', 'alquiler'];
@@ -11,7 +12,7 @@ export default function Listings() {
   const [tipo, setTipo] = useState<string>('');
 
   useEffect(() => {
-    document.title = 'Propiedades | Jarvis Acevedo Real Estate';
+    document.title = `Propiedades | ${SITE_TITLE}`;
   }, []);
 
   const filtered = useMemo(() => {
@@ -40,7 +41,7 @@ export default function Listings() {
             <select
               value={propertyType}
               onChange={e => setPropertyType(e.target.value)}
-              className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] focus:outline-none focus:border-[#C9A84C] transition-colors"
+              className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] focus:outline-none focus:border-[var(--primary)] transition-colors"
             >
               <option value="">Todas</option>
               {PROPERTY_TYPES.map(pt => (
@@ -53,7 +54,7 @@ export default function Listings() {
             <select
               value={tipo}
               onChange={e => setTipo(e.target.value)}
-              className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] capitalize focus:outline-none focus:border-[#C9A84C] transition-colors"
+              className="bg-white border border-gray-200 px-4 py-3 text-sm text-[#1A1A1A] capitalize focus:outline-none focus:border-[var(--primary)] transition-colors"
             >
               <option value="">Todas</option>
               {TIPOS.map(t => (

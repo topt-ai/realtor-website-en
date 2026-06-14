@@ -20,7 +20,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
       : null;
 
   return (
-    <div className="group flex flex-col bg-white border border-gray-100 hover:border-[#C9A84C] transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 h-full">
+    <div className="group flex flex-col bg-white border border-gray-100 hover:border-[var(--primary)] transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 h-full">
       <Link to={`/propiedades/${listing.id}`} className="block relative aspect-[4/3] overflow-hidden">
         <img
           src={firstPhoto}
@@ -35,7 +35,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
           <div
             className={`absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-semibold tracking-wider uppercase border-2 ${
               listing.tipo === 'venta'
-                ? 'border-[#C9A84C] text-[#C9A84C]'
+                ? 'border-[var(--primary)] text-[var(--primary)]'
                 : 'border-[#1E4A8B] text-[#1E4A8B]'
             }`}
           >
@@ -63,13 +63,13 @@ export default function ListingCard({ listing }: ListingCardProps) {
               </span>
             )}
             {listing.negociable && (
-              <span className="text-[10px] uppercase tracking-widest bg-[#C9A84C] text-white px-2 py-0.5 rounded-full font-semibold">
+              <span className="text-[10px] uppercase tracking-widest bg-[var(--primary)] text-white px-2 py-0.5 rounded-full font-semibold">
                 Precio negociable
               </span>
             )}
           </div>
           <Link to={`/propiedades/${listing.id}`}>
-            <h3 className="text-xl font-medium text-[#1A1A1A] mb-2 line-clamp-2 font-serif group-hover:text-[#C9A84C] transition-colors">
+            <h3 className="text-xl font-medium text-[#1A1A1A] mb-2 line-clamp-2 font-serif group-hover:text-[var(--primary)] transition-colors">
               {listing.titulo}
             </h3>
           </Link>
@@ -79,15 +79,15 @@ export default function ListingCard({ listing }: ListingCardProps) {
 
           <div className="flex items-center gap-6 text-[#2C2C2C] mb-8 border-t border-gray-100 pt-4">
             <div className="flex items-center gap-2">
-              <Bed size={18} className="text-[#C9A84C]" />
+              <Bed size={18} className="text-[var(--primary)]" />
               <span className="text-sm">{listing.habitaciones}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Bath size={18} className="text-[#C9A84C]" />
+              <Bath size={18} className="text-[var(--primary)]" />
               <span className="text-sm">{listing.banos}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Square size={18} className="text-[#C9A84C]" />
+              <Square size={18} className="text-[var(--primary)]" />
               <span className="text-sm">{listing.metros}</span>
             </div>
           </div>
