@@ -3,8 +3,8 @@ export const AGENT_CONFIG = {
   tagline: "Finding you the home you deserve",
   bio: "With over 10 years of experience in premium real estate, Marcus Reid combines local market knowledge with world-class service. Whether you're buying your first home or investing in luxury property, Marcus is your trusted guide.",
   whatsapp: "50372018215",
-  website: "https://marcusreid.tuwebsv.com",
-  portal: "https://portal-en.tuwebsv.com",
+  website: "https://marcusreid.thecitadl.com",
+  portal: "https://portal-en.thecitadl.com",
   primaryColor: "#C9A84C",
   logo: "/tommyaboutus.webp",
 };

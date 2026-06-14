@@ -23,7 +23,7 @@ export const AGENT_CONFIG = {
   bio: "Long-form about paragraph.",
   whatsapp: "503XXXXXXXX",            // digits only, country code first
   website: "https://client.example.com",
-  portal: "https://portal.tuwebsv.com",
+  portal: "https://portal.thecitadl.com",
   primaryColor: "#C9A84C",            // applied via CSS variable --primary
   logo: "/agent-photo.webp",          // file in /public, used as avatar
 };
