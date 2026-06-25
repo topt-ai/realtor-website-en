@@ -40,11 +40,21 @@ export async function fetchListings(): Promise<Listing[]> {
     if (error) throw error;
 
     const listings: Listing[] = (data ?? []).map((row: any) => {
-      const imgs = Array.isArray(row.listing_images) ? [...row.listing_images] : [];
-      imgs.sort((a, b) => (a?.order_index ?? 0) - (b?.order_index ?? 0));
-      const images = imgs
-        .map((i: any) => (typeof i?.url === 'string' ? i.url.trim() : ''))
-        .filter(Boolean);
+      let images: string[];
+
+      if (row.is_manual === false) {
+        // MLS-imported listing: images come from the external_image_urls column
+        images = Array.isArray(row.external_image_urls)
+          ? row.external_image_urls.filter((u: any) => typeof u === 'string' && u.trim())
+          : [];
+      } else {
+        // Manually uploaded listing: images come from the listing_images join
+        const imgs = Array.isArray(row.listing_images) ? [...row.listing_images] : [];
+        imgs.sort((a, b) => (a?.order_index ?? 0) - (b?.order_index ?? 0));
+        images = imgs
+          .map((i: any) => (typeof i?.url === 'string' ? i.url.trim() : ''))
+          .filter(Boolean);
+      }
 
       return {
         id: String(row.id ?? ''),
