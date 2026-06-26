@@ -11,7 +11,7 @@ export default function Contact() {
     <div className="min-h-screen bg-[#F8F6F2] pt-12 pb-24 px-6">
       <div className="max-w-3xl mx-auto">
         <div className="mb-16 text-center md:text-left">
-          <p className="text-[var(--primary)] uppercase tracking-widest text-sm mb-4 font-semibold">
+          <p className="text-gray-400 uppercase tracking-widest text-sm mb-4 font-medium">
             Get in touch
           </p>
           <h1 className="text-4xl md:text-6xl font-serif text-[#1A1A1A] mb-6">Contact</h1>
@@ -35,7 +35,7 @@ export default function Contact() {
               />
               <div>
                 <p className="font-serif text-lg text-[#1A1A1A]">{AGENT_CONFIG.name}</p>
-                <p className="text-xs uppercase tracking-widest text-[var(--primary)]">Lead Agent</p>
+                <p className="text-xs uppercase tracking-widest text-gray-400">Lead Agent</p>
               </div>
             </div>
 

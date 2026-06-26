@@ -74,25 +74,50 @@ export default function ListingDetail() {
       <meta name="twitter:description" content={descripcion.substring(0, 160)} />
       <meta name="twitter:image" content={listing.images[0] || 'https://picsum.photos/seed/luxuryhome/1200/630'} />
 
-      {/* Back Link */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <Link
-          to="/properties"
-          className="inline-flex items-center gap-2 text-gray-500 hover:text-[#1A1A1A] uppercase tracking-widest text-xs transition-colors"
-        >
-          <ArrowLeft size={14} /> Back to properties
-        </Link>
+      {/* Typographic Hero */}
+      <div className="bg-[#111111] text-white w-full">
+        <div className="max-w-7xl mx-auto px-6 pt-8 pb-4">
+          <Link
+            to="/properties"
+            className="inline-flex items-center gap-2 text-white/40 hover:text-white/80 uppercase tracking-widest text-xs transition-colors"
+          >
+            <ArrowLeft size={14} /> Back to properties
+          </Link>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 pb-16 pt-8">
+          <div className="flex items-center gap-2 text-white/40 mb-6">
+            <MapPin size={15} />
+            <span className="uppercase tracking-widest text-xs">{listing.ubicacion}</span>
+          </div>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-white leading-tight mb-8 max-w-4xl">
+            {listing.titulo}
+          </h1>
+          <div className="flex items-baseline gap-6 flex-wrap">
+            <p className="text-3xl md:text-4xl font-light text-[var(--primary)]">
+              {formatPrecio(listing.precio)}
+            </p>
+            {listing.tipo && (
+              <span className={`text-xs font-semibold tracking-widest uppercase border rounded-full px-3 py-1 ${
+                listing.tipo === 'venta'
+                  ? 'border-[var(--primary)] text-[var(--primary)]'
+                  : 'border-[#6B93C9] text-[#6B93C9]'
+              }`}>
+                {listing.tipo === 'venta' ? 'For Sale' : listing.tipo === 'alquiler' ? 'For Rent' : listing.tipo}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Gallery */}
-      <div className="max-w-[100rem] mx-auto px-4 sm:px-6 mb-16">
+      <div className="w-full mb-16">
         <Gallery photos={listing.images} title={listing.titulo} />
       </div>
 
       {/* Video Tour */}
       {listing.video_url && (
         <div className="max-w-[100rem] mx-auto px-4 sm:px-6 mb-16">
-          <p className="text-[var(--primary)] uppercase tracking-widest text-sm mb-4">Video Tour</p>
+          <p className="text-gray-400 uppercase tracking-widest text-sm mb-4">Video Tour</p>
           {(() => {
             const url = listing.video_url;
             const isYouTube = /youtube\.com|youtu\.be/.test(url);
@@ -144,18 +169,10 @@ export default function ListingDetail() {
           {/* Main Details */}
           <div className="lg:col-span-8">
             <div className="mb-12">
-              <div className="flex items-center gap-2 text-[var(--primary)] mb-4">
-                <MapPin size={18} />
-                <span className="uppercase tracking-widest text-sm font-medium">{listing.ubicacion}</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#1A1A1A] mb-8 leading-tight">
-                {listing.titulo}
-              </h1>
-              
               <div className="flex flex-wrap items-center gap-8 py-6 border-y border-gray-100 text-[#2C2C2C]">
                 {listing.habitaciones != null && (
                   <div className="flex items-center gap-3">
-                    <Bed size={24} className="text-[var(--primary)]" />
+                    <Bed size={24} className="text-gray-400" />
                     <div>
                       <p className="text-xl font-light">{listing.habitaciones}</p>
                       <p className="text-xs uppercase tracking-widest text-gray-500">Bedrooms</p>
@@ -166,7 +183,7 @@ export default function ListingDetail() {
                   <>
                     <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
                     <div className="flex items-center gap-3">
-                      <Bath size={24} className="text-[var(--primary)]" />
+                      <Bath size={24} className="text-gray-400" />
                       <div>
                         <p className="text-xl font-light">{listing.banos}</p>
                         <p className="text-xs uppercase tracking-widest text-gray-500">Bathrooms</p>
@@ -178,7 +195,7 @@ export default function ListingDetail() {
                   <>
                     <div className="w-px h-10 bg-gray-200 hidden sm:block"></div>
                     <div className="flex items-center gap-3">
-                      <Square size={24} className="text-[var(--primary)]" />
+                      <Square size={24} className="text-gray-400" />
                       <div>
                         <p className="text-xl font-light">{listing.metros}</p>
                         <p className="text-xs uppercase tracking-widest text-gray-500">Sq Ft</p>
@@ -197,43 +214,20 @@ export default function ListingDetail() {
             </div>
           </div>
 
-          {/* Sidebar / Sticky CTA */}
+          {/* Sidebar */}
           <div className="lg:col-span-4">
             <div className="sticky top-32 bg-[#F8F6F2] p-8 md:p-10 border border-gray-100">
-              {listing.tipo && (
-                <div
-                  className={`inline-block rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border-2 mb-4 ${
-                    listing.tipo === 'venta'
-                      ? 'border-[var(--primary)] text-[var(--primary)]'
-                      : 'border-[#1E4A8B] text-[#1E4A8B]'
-                  }`}
-                >
-                  {listing.tipo === 'venta' ? 'For Sale' : listing.tipo === 'alquiler' ? 'For Rent' : listing.tipo}
-                </div>
-              )}
-              <p className="text-sm uppercase tracking-widest text-gray-500 mb-2">Price</p>
-              <p className="text-4xl md:text-5xl font-light text-[#1A1A1A] mb-10">
-                {formatPrecio(listing.precio)}
+              <WhatsAppButton
+                whatsapp={listing.whatsapp}
+                titulo={listing.titulo}
+                pageUrl={currentUrl}
+                className="w-full py-4 text-lg"
+              />
+              <p className="text-xs text-gray-400 mt-3 text-center font-light">
+                This connects buyers directly to your WhatsApp
               </p>
-              
-              <div className="mb-10">
-                <WhatsAppButton
-                  whatsapp={listing.whatsapp}
-                  titulo={listing.titulo}
-                  pageUrl={currentUrl}
-                  className="w-full py-4 text-lg"
-                />
-                <p className="text-xs text-gray-400 mt-3 text-center font-light">
-                  This connects buyers directly to your WhatsApp
-                </p>
-              </div>
 
-              <div className="border-t border-gray-200 pt-8 mb-10">
-                <p className="text-xs uppercase tracking-widest text-gray-500 mb-6">Send an inquiry</p>
-                <LeadCaptureForm listingId={listing.id} compact />
-              </div>
-
-              <div className="border-t border-gray-200 pt-8 flex items-center gap-4">
+              <div className="border-t border-gray-200 pt-8 mt-8 flex items-center gap-4">
                 <img
                   src={AGENT_CONFIG.logo}
                   alt={AGENT_CONFIG.name}
@@ -242,12 +236,23 @@ export default function ListingDetail() {
                 />
                 <div>
                   <p className="font-serif text-lg text-[#1A1A1A]">{AGENT_CONFIG.name}</p>
-                  <p className="text-xs uppercase tracking-widest text-[var(--primary)]">Lead Agent</p>
+                  <p className="text-xs uppercase tracking-widest text-gray-400">Lead Agent</p>
                 </div>
               </div>
             </div>
           </div>
 
+        </div>
+      </div>
+
+      {/* Inquiry Form */}
+      <div className="max-w-7xl mx-auto px-6 mt-24 pt-16 border-t border-gray-100">
+        <div className="max-w-2xl">
+          <p className="text-gray-400 uppercase tracking-widest text-sm mb-4">Get in touch</p>
+          <h2 className="text-3xl md:text-4xl font-serif text-[#1A1A1A] mb-10">
+            Interested in this property?
+          </h2>
+          <LeadCaptureForm listingId={listing.id} />
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@ export default function ListingCard({ listing }: ListingCardProps) {
   };
 
   return (
-    <div className="group flex flex-col bg-white border border-gray-100 hover:border-[var(--primary)] transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 h-full">
+    <div className="group flex flex-col bg-white border border-gray-100 hover:border-gray-400 transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 h-full">
       <Link to={`/properties/${listing.id}`} className="block relative aspect-[4/3] overflow-hidden">
         {firstPhoto ? (
           <img
@@ -90,30 +90,30 @@ export default function ListingCard({ listing }: ListingCardProps) {
             )}
           </div>
           <Link to={`/properties/${listing.id}`}>
-            <h3 className="text-xl font-medium text-[#1A1A1A] mb-2 line-clamp-2 font-serif group-hover:text-[var(--primary)] transition-colors">
+            <h3 className="text-xl font-medium text-[#1A1A1A] mb-2 line-clamp-2 font-serif group-hover:text-[#555] transition-colors">
               {listing.titulo}
             </h3>
           </Link>
-          <p className="text-2xl font-light text-[#1A1A1A] mb-6">
+          <p className="text-2xl font-light text-[var(--primary)] mb-6">
             {formatPrecio(listing.precio)}
           </p>
 
           <div className="flex items-center gap-6 text-[#2C2C2C] mb-8 border-t border-gray-100 pt-4">
             {listing.habitaciones != null && (
               <div className="flex items-center gap-2">
-                <Bed size={18} className="text-[var(--primary)]" />
+                <Bed size={18} className="text-gray-400" />
                 <span className="text-sm">{listing.habitaciones}</span>
               </div>
             )}
             {listing.banos != null && (
               <div className="flex items-center gap-2">
-                <Bath size={18} className="text-[var(--primary)]" />
+                <Bath size={18} className="text-gray-400" />
                 <span className="text-sm">{listing.banos}</span>
               </div>
             )}
             {listing.metros && (
               <div className="flex items-center gap-2">
-                <Square size={18} className="text-[var(--primary)]" />
+                <Square size={18} className="text-gray-400" />
                 <span className="text-sm">{listing.metros}</span>
               </div>
             )}

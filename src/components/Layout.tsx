@@ -25,10 +25,10 @@ export default function Layout() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-sm uppercase tracking-widest hover:text-[var(--primary)] transition-colors">
+            <Link to="/" className="text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">
               Home
             </Link>
-            <Link to="/properties" className="text-sm uppercase tracking-widest hover:text-[var(--primary)] transition-colors">
+            <Link to="/properties" className="text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">
               Properties
             </Link>
             <Link
@@ -55,7 +55,7 @@ export default function Layout() {
             <Link to="/properties" className="text-lg tracking-widest uppercase">Properties</Link>
             <Link
               to="/contact"
-              className="text-lg tracking-widest uppercase text-[var(--primary)]"
+              className="text-lg tracking-widest uppercase text-[#1A1A1A]"
             >
               Contact
             </Link>
@@ -69,7 +69,7 @@ export default function Layout() {
           <div className="bg-[#1A1A1A] text-white py-2 px-4 flex justify-between items-center text-xs md:text-sm shadow-sm relative z-30">
             <div className="mx-auto text-center flex-1 pr-4">
               This is a demo site. The properties shown are for demonstration only. Want one like this for your business?{' '}
-              <a href="https://cal.com/the-citadl/discovery-call" target="_blank" rel="noopener noreferrer" className="text-[var(--primary)] hover:underline inline-block mt-1 md:mt-0 md:ml-1 font-medium">
+              <a href="https://cal.com/the-citadl/discovery-call" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80 inline-block mt-1 md:mt-0 md:ml-1 font-medium">
                 → Book a free discovery call
               </a>
             </div>
@@ -84,7 +84,7 @@ export default function Layout() {
       {/* Pitch Section */}
       <section className="w-full bg-[#F8F6F2] py-24 px-6 border-t border-gray-200">
         <div className="max-w-5xl mx-auto text-center">
-          <span className="text-[var(--primary)] text-sm font-bold uppercase tracking-widest mb-4 block">
+          <span className="text-gray-400 text-sm font-medium uppercase tracking-widest mb-4 block">
             YOUR PERSONAL BRAND
           </span>
           <h2 className="text-4xl md:text-5xl font-serif text-[#1A1A1A] mb-6">
@@ -96,7 +96,7 @@ export default function Layout() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 text-[var(--primary)]">
+              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 text-gray-400">
                 <RefreshCw size={28} strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-medium text-[#1A1A1A] mb-3">Always up to date</h3>
@@ -106,7 +106,7 @@ export default function Layout() {
             </div>
 
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 text-[var(--primary)]">
+              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 text-gray-400">
                 <Smartphone size={28} strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-medium text-[#1A1A1A] mb-3">Your listings, your brand</h3>
@@ -116,7 +116,7 @@ export default function Layout() {
             </div>
 
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 text-[var(--primary)]">
+              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 text-gray-400">
                 <MessageCircle size={28} strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-medium text-[#1A1A1A] mb-3">Leads straight to WhatsApp</h3>
@@ -150,7 +150,7 @@ export default function Layout() {
           </div>
 
           <div>
-            <h4 className="text-sm uppercase tracking-widest mb-6 text-[var(--primary)]">Contact</h4>
+            <h4 className="text-sm uppercase tracking-widest mb-6 text-gray-400">Contact</h4>
             <div className="flex flex-col gap-4 text-gray-400 font-light">
               <a href="mailto:hello@thecitadl.com" className="hover:text-white transition-colors">
                 hello@thecitadl.com

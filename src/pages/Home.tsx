@@ -30,7 +30,7 @@ export default function Home() {
         </div>
         
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto mt-16">
-          <p className="text-[var(--primary)] uppercase tracking-[0.3em] text-sm md:text-base mb-6 font-medium">
+          <p className="text-white/60 uppercase tracking-[0.3em] text-sm md:text-base mb-6 font-medium">
             {SITE_TITLE}
           </p>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 leading-tight">
@@ -72,7 +72,7 @@ export default function Home() {
               referrerPolicy="no-referrer"
             />
             <p className="mt-6 font-serif text-xl">{AGENT_CONFIG.name}</p>
-            <p className="text-[var(--primary)] uppercase tracking-widest text-xs mt-2">Founder & Lead Agent</p>
+            <p className="text-gray-400 uppercase tracking-widest text-xs mt-2">Founder & Lead Agent</p>
           </div>
         </div>
       </section>
@@ -83,7 +83,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
               <div>
-                <p className="text-[var(--primary)] uppercase tracking-widest text-sm mb-4">Exclusivity</p>
+                <p className="text-gray-400 uppercase tracking-widest text-sm mb-4">Exclusivity</p>
                 <h2 className="text-4xl md:text-5xl font-serif text-[#1A1A1A]">Featured Properties</h2>
               </div>
               <Link
