@@ -36,12 +36,22 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 leading-tight">
             {AGENT_CONFIG.tagline}.
           </h1>
-          <Link
-            to="/properties"
-            className="inline-flex items-center gap-3 bg-white text-[#1A1A1A] px-8 py-4 uppercase tracking-widest text-sm hover:bg-[var(--primary)] hover:text-white transition-colors duration-300"
-          >
-            View Properties <ArrowRight size={18} />
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to="/properties"
+              className="inline-flex items-center gap-3 bg-white text-[#1A1A1A] px-8 py-4 uppercase tracking-widest text-sm hover:bg-[var(--primary)] hover:text-white transition-colors duration-300"
+            >
+              View Properties <ArrowRight size={18} />
+            </Link>
+            <a
+              href="https://cal.com/the-citadl/discovery-call?overlayCalendar=true"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-[var(--primary)] text-white px-8 py-4 uppercase tracking-widest text-sm hover:opacity-90 transition-opacity duration-300"
+            >
+              Schedule a Call
+            </a>
+          </div>
         </div>
       </section>
 

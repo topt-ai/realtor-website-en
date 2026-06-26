@@ -133,12 +133,12 @@ export default function Layout() {
           </div>
 
           <a
-            href="https://cal.com/the-citadl/discovery-call"
+            href="https://cal.com/the-citadl/discovery-call?overlayCalendar=true"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-[var(--primary)] text-white px-8 py-4 uppercase tracking-widest text-sm hover:opacity-90 transition-opacity"
           >
-            I want my website
+            Schedule a Call
           </a>
         </div>
       </section>
@@ -166,9 +166,23 @@ export default function Layout() {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-800 flex flex-col items-center gap-4">
+        <div className="max-w-7xl mx-auto mt-16 pt-12 border-t border-gray-800 text-center mb-12">
+          <p className="text-2xl md:text-3xl font-serif text-white mb-6">
+            Let's build your brand. Let's talk.
+          </p>
+          <a
+            href="https://cal.com/the-citadl/discovery-call?overlayCalendar=true"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-[var(--primary)] text-white px-8 py-4 uppercase tracking-widest text-sm hover:opacity-90 transition-opacity"
+          >
+            Schedule a Call
+          </a>
+        </div>
+
+        <div className="max-w-7xl mx-auto pt-8 border-t border-gray-800 flex flex-col items-center gap-4">
           <p className="text-xs text-gray-400 uppercase tracking-widest text-center max-w-2xl leading-relaxed">
-            &copy; {new Date().getFullYear()} {SITE_TITLE}. Demo site — the properties shown are fictitious.
+            &copy; {new Date().getFullYear()} {SITE_TITLE}. Demo site. The properties shown are fictitious.
           </p>
           <p className="text-xs text-gray-500">
             Demo site created by <a href="https://www.thecitadl.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline">The Citadl</a>

@@ -216,15 +216,15 @@ export default function ListingDetail() {
               </p>
               
               <div className="mb-10">
-                <p className="text-sm text-[#2C2C2C] mb-6 font-light">
-                  Interested in this property? Contact us directly via WhatsApp to schedule a visit or request more information.
-                </p>
-                <WhatsAppButton 
+                <WhatsAppButton
                   whatsapp={listing.whatsapp}
                   titulo={listing.titulo}
                   pageUrl={currentUrl}
                   className="w-full py-4 text-lg"
                 />
+                <p className="text-xs text-gray-400 mt-3 text-center font-light">
+                  This connects buyers directly to your WhatsApp
+                </p>
               </div>
               
               <div className="border-t border-gray-200 pt-8 mt-8 flex items-center gap-4">
