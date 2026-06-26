@@ -30,6 +30,10 @@ export function formatPrecio(precio: number): string {
   }).format(precio);
 }
 
+function stripSampleData(s: string): string {
+  return s.replace(/\*+\s*SAMPLE DATA\s*\*+/gi, '').replace(/\*{2,}/g, '').trim();
+}
+
 export async function fetchListings(): Promise<Listing[]> {
   try {
     const { data, error } = await supabase
@@ -58,10 +62,10 @@ export async function fetchListings(): Promise<Listing[]> {
 
       return {
         id: String(row.id ?? ''),
-        titulo: String(row.titulo ?? ''),
+        titulo: stripSampleData(String(row.titulo ?? '')),
         precio: Number(row.precio ?? 0),
         ubicacion: String(row.ubicacion ?? ''),
-        descripcion: String(row.descripcion ?? ''),
+        descripcion: stripSampleData(String(row.descripcion ?? '')),
         habitaciones: row.habitaciones == null ? null : Number(row.habitaciones),
         banos: row.banos == null ? null : Number(row.banos),
         metros: row.metros == null ? '' : String(row.metros),

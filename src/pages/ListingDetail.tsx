@@ -11,9 +11,7 @@ export default function ListingDetail() {
   const { listings, loading, error } = useListings();
   
   const listing = listings.find(l => l.id === id);
-  const descripcion = listing
-    ? listing.descripcion.replace(/\*+\s*SAMPLE DATA\s*\*+/gi, '').trim()
-    : '';
+  const descripcion = listing?.descripcion ?? '';
 
 
 
