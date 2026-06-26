@@ -3,6 +3,7 @@ import { ArrowLeft, MapPin, Bed, Bath, Square } from 'lucide-react';
 import { useListings, formatPrecio } from '../lib/api';
 import Gallery from '../components/Gallery';
 import WhatsAppButton from '../components/WhatsAppButton';
+import LeadCaptureForm from '../components/LeadCaptureForm';
 import { AGENT_CONFIG, SITE_TITLE } from '../config';
 
 export default function ListingDetail() {
@@ -226,8 +227,13 @@ export default function ListingDetail() {
                   This connects buyers directly to your WhatsApp
                 </p>
               </div>
-              
-              <div className="border-t border-gray-200 pt-8 mt-8 flex items-center gap-4">
+
+              <div className="border-t border-gray-200 pt-8 mb-10">
+                <p className="text-xs uppercase tracking-widest text-gray-500 mb-6">Send an inquiry</p>
+                <LeadCaptureForm listingId={listing.id} compact />
+              </div>
+
+              <div className="border-t border-gray-200 pt-8 flex items-center gap-4">
                 <img
                   src={AGENT_CONFIG.logo}
                   alt={AGENT_CONFIG.name}

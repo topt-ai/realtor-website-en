@@ -13,8 +13,6 @@ export default function Layout() {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
-  const cleanWhatsapp = AGENT_CONFIG.whatsapp.replace(/\D/g, '');
-  const contactHref = `https://wa.me/${cleanWhatsapp}?text=${encodeURIComponent(`Hi ${AGENT_CONFIG.name}, I'd like more information.`)}`;
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8F6F2] font-sans text-[#1A1A1A]">
@@ -33,14 +31,12 @@ export default function Layout() {
             <Link to="/properties" className="text-sm uppercase tracking-widest hover:text-[var(--primary)] transition-colors">
               Properties
             </Link>
-            <a
-              href={contactHref}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/contact"
               className="text-sm uppercase tracking-widest border border-[#1A1A1A] px-6 py-2 hover:bg-[#1A1A1A] hover:text-white transition-colors"
             >
               Contact
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -57,14 +53,12 @@ export default function Layout() {
           <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 py-6 px-6 flex flex-col gap-6 shadow-xl">
             <Link to="/" className="text-lg tracking-widest uppercase">Home</Link>
             <Link to="/properties" className="text-lg tracking-widest uppercase">Properties</Link>
-            <a
-              href={contactHref}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/contact"
               className="text-lg tracking-widest uppercase text-[var(--primary)]"
             >
               Contact
-            </a>
+            </Link>
           </div>
         )}
       </header>
