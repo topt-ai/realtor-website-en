@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Bed, Bath, Square } from 'lucide-react';
+import { Bed, Bath, Square, Home } from 'lucide-react';
 import { Listing, formatPrecio } from '../lib/api';
 import WhatsAppButton from './WhatsAppButton';
 
@@ -9,7 +9,7 @@ interface ListingCardProps {
 }
 
 export default function ListingCard({ listing }: ListingCardProps) {
-  const firstPhoto = listing.images[0] || 'https://picsum.photos/seed/house/800/600';
+  const firstPhoto = listing.images[0] ?? null;
   const listingUrl = `${window.location.origin}/properties/${listing.id}`;
 
   const soldOverlay =
@@ -37,12 +37,18 @@ export default function ListingCard({ listing }: ListingCardProps) {
   return (
     <div className="group flex flex-col bg-white border border-gray-100 hover:border-[var(--primary)] transition-all duration-500 shadow-sm hover:shadow-xl hover:-translate-y-1 h-full">
       <Link to={`/properties/${listing.id}`} className="block relative aspect-[4/3] overflow-hidden">
-        <img
-          src={firstPhoto}
-          alt={listing.titulo}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          referrerPolicy="no-referrer"
-        />
+        {firstPhoto ? (
+          <img
+            src={firstPhoto}
+            alt={listing.titulo}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            referrerPolicy="no-referrer"
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+            <Home size={48} className="text-gray-300" strokeWidth={1} />
+          </div>
+        )}
         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-semibold tracking-wider uppercase text-[#1A1A1A]">
           {listing.ubicacion}
         </div>

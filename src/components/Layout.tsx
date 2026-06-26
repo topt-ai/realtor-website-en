@@ -1,6 +1,6 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Menu, X, Smartphone, MessageCircle, Search } from 'lucide-react';
+import { Menu, X, Smartphone, MessageCircle, RefreshCw } from 'lucide-react';
 import { AGENT_CONFIG, BRAND_MARK, SITE_TITLE } from '../config';
 
 export default function Layout() {
@@ -97,17 +97,27 @@ export default function Layout() {
             Stop depending on Marketplace.
           </h2>
           <p className="text-gray-600 text-lg leading-relaxed mb-16 max-w-3xl mx-auto">
-            The best agents don't wait for clients to find them on Zillow — they build their own brand, their own space, their own rules. Your personal website: showcase your properties, build trust, and convert visits into inquiries straight to your WhatsApp.
+            Zillow and Realtor.com show your listings next to every other agent's. Your own site puts you front and center. No competitors, no distractions, just you and the buyer.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 text-[var(--primary)]">
+                <RefreshCw size={28} strokeWidth={1.5} />
+              </div>
+              <h3 className="text-xl font-medium text-[#1A1A1A] mb-3">Always up to date</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Your MLS listings sync automatically. Add off-market and exclusive properties manually whenever you want.
+              </p>
+            </div>
+
             <div className="flex flex-col items-center text-center">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 text-[var(--primary)]">
                 <Smartphone size={28} strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-medium text-[#1A1A1A] mb-3">Your listings, your brand</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Upload new properties from your phone or laptop, wherever you are. No middlemen.
+                Upload new properties from your phone or laptop. No middlemen.
               </p>
             </div>
 
@@ -118,16 +128,6 @@ export default function Layout() {
               <h3 className="text-xl font-medium text-[#1A1A1A] mb-3">Leads straight to WhatsApp</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
                 Every property has a button that connects the buyer to you instantly.
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-6 text-[var(--primary)]">
-                <Search size={28} strokeWidth={1.5} />
-              </div>
-              <h3 className="text-xl font-medium text-[#1A1A1A] mb-3">Show up on Google</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Your site strengthens your local presence and helps you rank when someone searches for an agent in your area.
               </p>
             </div>
           </div>

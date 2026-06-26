@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Home } from 'lucide-react';
 
 interface GalleryProps {
   photos: string[];
@@ -13,7 +13,7 @@ export default function Gallery({ photos, title }: GalleryProps) {
   if (!photos || photos.length === 0) {
     return (
       <div className="aspect-[16/9] md:aspect-[21/9] bg-gray-100 flex items-center justify-center">
-        <span className="text-gray-400">No images available</span>
+        <Home size={64} className="text-gray-300" strokeWidth={1} />
       </div>
     );
   }

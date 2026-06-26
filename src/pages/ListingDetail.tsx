@@ -10,6 +10,9 @@ export default function ListingDetail() {
   const { listings, loading, error } = useListings();
   
   const listing = listings.find(l => l.id === id);
+  const descripcion = listing
+    ? listing.descripcion.replace(/\*+\s*SAMPLE DATA\s*\*+/gi, '').trim()
+    : '';
 
 
 
@@ -59,15 +62,15 @@ export default function ListingDetail() {
   return (
     <div className="min-h-screen bg-white pb-24">
       <title>{`${listing.titulo} | ${SITE_TITLE}`}</title>
-      <meta name="description" content={listing.descripcion.substring(0, 160)} />
+      <meta name="description" content={descripcion.substring(0, 160)} />
       <meta property="og:title" content={`${listing.titulo} | ${SITE_TITLE}`} />
-      <meta property="og:description" content={listing.descripcion.substring(0, 160)} />
+      <meta property="og:description" content={descripcion.substring(0, 160)} />
       <meta property="og:image" content={listing.images[0] || 'https://picsum.photos/seed/luxuryhome/1200/630'} />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={`${listing.titulo} | ${SITE_TITLE}`} />
-      <meta name="twitter:description" content={listing.descripcion.substring(0, 160)} />
+      <meta name="twitter:description" content={descripcion.substring(0, 160)} />
       <meta name="twitter:image" content={listing.images[0] || 'https://picsum.photos/seed/luxuryhome/1200/630'} />
 
       {/* Back Link */}
@@ -111,7 +114,7 @@ export default function ListingDetail() {
                 <div className="relative w-full aspect-video bg-black">
                   <iframe
                     src={embedUrl}
-                    title={`${listing.titulo} — Video tour`}
+                    title={`${listing.titulo} - Video tour`}
                     className="absolute inset-0 w-full h-full"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -187,7 +190,7 @@ export default function ListingDetail() {
 
             <div className="prose prose-lg max-w-none text-[#2C2C2C] font-light leading-relaxed">
               <h3 className="text-2xl font-serif text-[#1A1A1A] mb-6">Description</h3>
-              {listing.descripcion.split('\n').map((paragraph, idx) => (
+              {descripcion.split('\n').map((paragraph, idx) => (
                 <p key={idx} className="mb-4">{paragraph}</p>
               ))}
             </div>
